@@ -1,0 +1,78 @@
+<head>
+    <style>
+        #example {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #example td,
+        #example th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #example tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #example tr:hover {
+            background-color: #ddd;
+        }
+
+        #example th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        .intro {
+            background-color: #E9ECEF;
+        }
+    </style>
+
+</head>
+
+<body style="width: 123%;">
+    <div class="intro">
+        <h1 class="intro">Hi {{currentUser.firstName}}!</h1>
+        <p class="intro">You're logged in with Angular 8!!</p>
+        <h3 class="intro">All login audit :</h3>
+    </div>
+
+    <!-- <ul>
+        <li *ngFor="let audit of audits">
+            <br /><span class="badge badge-primary">{{audit.user}}</span>
+            <br /><span class="badge badge-secondary">{{audit._id}}</span>
+            <br />Login - {{audit.loginTime | date:'MM/dd/yyyy hh:mm:ss'}}
+            <br />Logout - {{audit.logoutTime | date:'MM/dd/yyyy hh:mm:ss'}}
+            <br />IP - {{audit.ip}}
+        </li>
+
+    </ul> -->
+    <div class="form-group mt-4">
+        <input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="term">
+    </div>
+    <table id="example">
+        <thead>
+            <tr>
+                <th (click)="sort('user')">User</th>
+                <th (click)="sort('_id')">Id</th>
+                <th (click)="sort('loginTime')">Login</th>
+                <th (click)="sort('logoutTime')">Logout</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let audit of audits  | paginate: config">
+                <td>{{audit.user}}</td>
+                <td>{{audit._id}}</td>
+                <td>{{audit.loginTime | date:'MM/dd/yyyy hh:mm:ss'}}</td>
+                <td>{{audit.logoutTime | date:'MM/dd/yyyy hh:mm:ss'}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+</body>
